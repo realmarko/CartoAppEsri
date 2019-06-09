@@ -3,14 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { EsriMapComponent } from './esri-map/esri-map.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EsriMapComponent
+    EsriMapComponent,
+    
+    MainNavComponent
+    
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
