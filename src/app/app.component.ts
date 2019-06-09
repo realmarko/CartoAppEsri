@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     this.loadWithPoint();
   }
   async loadWithPoint() {
-  
+
 
     if (navigator) {
       navigator.geolocation.getCurrentPosition(pos => {
@@ -45,6 +45,8 @@ export class AppComponent implements OnInit {
   mapLoadedEvent(status: boolean) {
     console.log('The map loaded: ' + status);
   }
-
+  onFeatureSelected(feature: string) {
+    alert(feature);
+  }
 
 }

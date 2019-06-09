@@ -8,9 +8,12 @@
     [opened]="!(isHandset | async)!.matches">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#" (click)="onSelect('1')">Llenar nuevo formulario</a>
+      <a mat-list-item href="#" (click)="onSelect('2')">Editar formulario guardado</a>
+      <a mat-list-item href="#" (click)="onSelect('3')">Enviar Formulario Finalizado</a>
+      <a mat-list-item href="#" (click)="onSelect('4')">Ver Formularios Enviados</a>
+      <a mat-list-item href="#" (click)="onSelect('5')">Obtener Formulario en Blanco</a>
+      <a mat-list-item href="#" (click)="onSelect('6')">Borrar Formularios Guardados</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
