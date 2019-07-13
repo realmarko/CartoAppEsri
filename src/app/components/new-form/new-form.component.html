@@ -1,0 +1,590 @@
+<form (ngSubmit)="onSubmit()" #f="ngForm">
+  <div class="form-group">
+    <label for="folio">Folio</label>
+    <input type="text" class="form-control" id="folio" name="folio" placeholder="Folio" />
+  </div>
+  <div class="form-grou">
+    <label for="fecha">Seleccione la fecha</label>
+    <input type="date" class="form-control" id="fecha" name="fecha" placeholder="fecha">
+  </div>
+
+  <div class="form-group">
+    <label>Se encuentra la persona solicitante en el domicilio:</label>
+    <div class="radio" *ngFor="let val of valuesSiNo">
+      <label>
+        <input type="radio" name="val" ngModel [value]="val">{{val}}
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="enDomicilio" id="siEnDomicilio" value="si" checked>
+      <label class="form-check-label" for="siEnDomicilio">Si</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="enDomicilio" id="noEnDomicilio" value="no">
+      <label class="form-check-label" for="noEnDomicilio">No</label>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label>Se identificó con:</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="ine" id="ine" value="ine">
+    <label class="form-check-label" for="ine">INE</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="comDomicilio" id="comDomicilio" value="comDomicilio">
+    <label class="form-check-label" for="comDomicilio">COMPROBANTE DE DOMICILIO</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="cartilla" id="cartilla" value="cartilla">
+    <label class="form-check-label" for="cartilla">CARTILLA MILITAR</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="pasaporte" id="pasaporte" value="pasaporte">
+    <label class="form-check-label" for="pasaporte">PASAPORTE</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="curp" id="curp" value="curp">
+    <label class="form-check-label" for="curp">CURP</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="otra" id="otra" value="otra">
+    <label class="form-check-label" for="otra">OTRA</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="noAplica" id="noAplica" value="noAplica">
+    <label class="form-check-label" for="noAplica">NO APLICA</label>
+  </div>
+
+  <div class="form-group">
+    <label for="folioFonden">Folio FONDEN</label>
+    <input type="text" class="form-control" id="folioFonden" name="folioFonden" placeholder="Folio FONDEN" />
+  </div>
+  <div class="form-group">
+    <label for="recibioApoyo">Recibió apoyo de algún organismo público o privado</label>
+    <select id="recibioApoyo" name="recibioApoyo" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="proporciono">Si recibió apoyo quien se lo proporcionó</label>
+    <select name="proporciono" id="proporciono" class="form-control">
+      <option value="fonden">FONDEN</option>
+      <option value="organismoEstatal">Organismo estatal</option>
+      <option value="organismoMunicipal">Organismo municipal</option>
+      <option value="privado">Privado</option>
+      <option value="noAplica">No aplica</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="nombreSolicitante">Nombre del solicitante</label>
+    <input type="text" class="form-control" name="nombreSolicitante" id="nombreSolicitante"
+      placeholder="Nombre del solicitante" />
+  </div>
+  <div class="form-group">
+    <label for="primerApellidoSolicitante">Primer apellido del solicitante</label>
+    <input type="text" class="form-control" name="primerApellidoSolicitante" id="primerApellidoSolicitante"
+      placeholder="Primer apellido del solicitante" />
+  </div>
+  <div class="form-group">
+    <label for="segundoApellidoSolicitante">Segundo apellido del solicitante</label>
+    <input type="text" class="form-control" name="segundoApellidoSolicitante" id="segundoApellidoSolicitante"
+      placeholder="Segundo apellido del solicitante" />
+  </div>
+
+  <div class="form-group">
+    <label for="genero">Género</label>
+    <select name="genero" id="genero" class="form-control">
+      <option value="masculino">Masculino</option>
+      <option value="femenino">Femenino</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="nacimiento">Fecha de nacimiento</label>
+    <input type="date" id="nacimiento" name="nacimiento" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="lugarNacimiento">Lugar de nacimiento</label>
+    <select name="lugarNacimiento" id="lugarNacimiento">
+      <option value="seleccione">Seleccione una respuesta</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="pais">En que pais nació</label>
+    <input type="text" id="pais" name="pais" class="form-control" placeholder="En que pais nació" />
+  </div>
+  <div class="form-group">
+    <label for="curp">CURP</label>
+    <input type="text" id="curp" name="curp" class="form-control" placeholder="CURP" />
+  </div>
+  <div class="form-group">
+    <label for="actividad">Actividad económica</label>
+    <select name="actividad" id="actividad" class="form-control">
+      <option value="agropecuaria">Agropecuaria</option>
+      <option value="industria">Industria</option>
+      <option value="comercio">Comercio</option>
+      <option value="servicios">Servicios</option>
+      <option value="profesionales">Profesionales</option>
+      <option value="gobierno">Gobierno</option>
+      <option value="jubilado">Jubilado y/o pensionado</option>
+      <option value="hogar">Hogar</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="ingreso">Ingreso mensual individual</label>
+    <input type="number" class="form-control" id="ingreso" name="ingreso" />
+  </div>
+  <div class="form-group">
+    <label for="ingresoFamiliar">Ingreso mensual familiar</label>
+    <input type="number" class="form-control" id="ingresoFamiliar" name="ingresoFamiliar" />
+  </div>
+  <div class="form-group">
+    <label for="noCredencial">No. de credencial oficial vigente(si la tiene)</label>
+    <input type="number" class="form-control" id="noCredencial" name="noCredencial">
+  </div>
+  <div class="form-group">
+    <label for="indigena">Se considera indigena</label>
+    <select name="indigena" id="indigena" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="telParticular">Teléfono particular</label>
+    <input type="tel" id="telParticular" name="telParticular" class="form-control"
+      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+  </div>
+  <div class="form-group">
+    <label for="telRecados">Teléfono para recados</label>
+    <input type="tel" id="telRecados" name="telRecados" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+  </div>
+  <div class="form-group">
+    <label for="discapacidad">Presenta alguna discapacidad</label>
+    <select name="discapacidad" id="discapacidad" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="discapacidadDesc">Si presenta alguna discapacidad especifique</label>
+    <input type="text" id="discapacidadDesc" name="discapacidadDesc" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="degenerativa">Presenta alguna enfermedad degenerativa</label>
+    <select name="degenerativa" id="degenerativa" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="estado">Estado donde se localiza la vivienda</label>
+    <select name="estado" id="estado" class="form-control">
+      <option value="si">SI</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="municipio">Municipio donde se localiza tu vivienda</label>
+    <input type="text" id="municipio" name="municipio" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="">Domicilio de la vivienda</label><br />
+    <label for="">Calle:</label>
+    <input type="text" id="calle" name="calle" class="form-control" placeholder="Calle">
+  </div>
+  <div class="form-group">
+    <label for="noExterior">No. exterior</label>
+    <input type="text" id="noExterior" name="noExterior" class="form-control" placeholder="No. exterior">
+  </div>
+  <div class="form-group">
+    <label for="noInterior">No. interior</label>
+    <input type="text" id="noInterior" name="noInterior" class="form-control" placeholder="No. interior">
+  </div>
+  <div class="form-group">
+    <label for="manzana">Manzana</label>
+    <input type="text" id="manzana" name="manzana" class="form-control" placeholder="manzana">
+  </div>
+  <div class="form-group">
+    <label for=""></label>
+    <input type="text" id="" name="" class="form-control" placeholder="">
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="lote">Lote</label>
+    <input type="text" id="lote" name="lote" class="form-control" placeholder="Lote">
+  </div>
+  <div class="form-group">
+    <label for="colonia">Nombre de la Colonia/Barrio/Ejido/etc.</label>
+    <input type="text" id="colonia" name="colonia" class="form-control"
+      placeholder="Nombre de la Colonia/Barrio/Ejido/etc.">
+  </div>
+  <div class="form-group">
+    <label for="localidad">Localidad</label>
+    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad">
+  </div>
+  <div class="form-group">
+    <label for="cp">Código postal</label>
+    <input type="text" id="cp" name="cp" class="form-control" placeholder="Código postal">
+  </div>
+  <div class="form-group">
+    <label for="posesion">Propiedad posesión de la vivienda</label>
+    <select name="posesion" id="posesion">
+      <option value="conEscrituras">Propia con escrituras</option>
+      <option value="sinEscrituras">Propiea sin escrituras</option>
+      <option value="pagandola">Propia, aun pagandola</option>
+      <option value="rentada">Rentada</option>
+      <option value="prestada">Prestada</option>
+      <option value="posesion">En posesión</option>
+      <option value="">Otra</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="porcentajeIngreso">Si esta pagando su vivienda, que porcentaje de su ingreso destina</label>
+    <input type="text" id="porcentajeIngreso" name="porcentajeIngreso" class="form-control" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="referenciaUbicacion">Referencia de ubicación</label>
+    <input type="text" id="referenciaUbicacion" name="referenciaUbicacion" class="form-control"
+      placeholder="Referencia de ubicación">
+  </div>
+  <div class="form-group">
+    <label for="hayPersonas">¿Hay personas que aportan al ingreso y no viven en la vivienda?</label>
+    <select name="hayPersonas" id="hayPersonas" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="actividadEconomica">La vivienda es ocupada para realizar alguna actividad económica</label>
+    <select name="actividadEconomica" id="actividadEconomica" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="tarjeta">En caso de haber recibido algún subsidio a través de alguna tarjeta
+      ¿Cuenta con dicha tarjeta?
+    </label>
+    <select name="tarjeta" id="tarjeta" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="habitanMas">Habitan más personas la vivienda aparte de usted</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="habitanMas" id="habitanMas" value="si" checked>
+      <label class="form-check-label" for="habitanMas">Si</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="habitanMas" id="habitanMas" value="si" checked>
+      <label class="form-check-label" for="habitanMas">No</label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="habitanMas">El predio es de tipo</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="tipoPredio" id="tipoPredio" value="si" checked>
+      <label class="form-check-label" for="tipoPredio">Si</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="tipoPredio" id="tipoPredio" value="no" checked>
+      <label class="form-check-label" for="tipoPredio">No</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="predioEs">Y el predio es</label>
+    <select name="predioEs" id="predioEs" class="form-control">
+      <option value="unifamiliar">Unifamiliar</option>
+      <option value="plurifamiliar">Plurifamiliar</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="terminadas">¿Cuantas viviendas terminadas existen en el predio?</label>
+    <input type="text" id="terminadas" name="terminadas" class="form-control" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="proceso">¿Cuantas viviendas en proceso de construcción existen en el predio?</label>
+    <input type="number" id="proceso" name="proceso" class="form-control" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="provisionales">¿Cuantas viviendas provisionales existen en el predio?</label>
+    <input type="number" id="provisionales" name="provisionales" class="form-control" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="familiasEn">¿Cuantas familias existen en el predio?</label>
+    <input type="number" id="familiasEn" name="familiasEn" class="form-control" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="estadoConstruccion">Estado Actual de la construccion</label>
+    <select name="estadoConstruccion" id="estadoConstruccion" class="form-control">
+      <option value="parcial">Parcial</option>
+      <option value="total">Total</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="patrimonial">Se encuentra en zona patrimonial</label>
+    <select name="patrimonial" id="patrimonial" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+
+  </div>
+  <div class="form-group">
+    <label for="tecnicas">La vivienda presenta técnicas constructivas regionales</label>
+    <select name="tecnicas" id="tecnicas" class="form-control">
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="cimientos">Cimientos de la vivienda</label>
+    <select name="cimientos" id="cimientos" class="form-control">
+      <option value="piedraAhogada">Piedra ahogada</option>
+      <option value="mamposteria">Mampostería</option>
+      <option value="concreto">Concreto</option>
+      <option value="losa">Losa de cimentación</option>
+      <option value="noTiene">No tiene</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="dimensionesCimentacion">¿Que dimensiones tiene la cimentación?(ml/m2)</label>
+    <input type="number" id="dimensionesCimentacion" name="dimensionesCimentacion" class="form-control" placeholder="">
+  </div>
+
+
+  <div class="form-group">
+    <label for="castillos">Castillos de la vivienda</label>
+    <select name="castillos" id="castillos" class="form-control">
+      <option value="castillos">Castillos</option>
+      <option value="columnas">Columnas</option>
+      <option value="castillosAhogados">Castillos Ahogados</option>
+      <option value="noTiene">No tiene</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="separacion">Que separación promedio tienen los castillos</label>
+    <input type="text" id="separacion" name="separacion" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="trabes">Trabes en la vivienda</label>
+    <select name="trabes" id="trabes" class="form-control">
+      <option value="concreto">Concreto armado</option>
+      <option value="metalicas">Metálicas</option>
+      <option value="madera">Madera</option>
+      <option value="noTiene">No tiene</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="claros">Claros promedio entre trabes</label>
+    <input type="text" id="claros" name="claros" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="muros">Muros en la vivienda</label>
+    <select name="muros" id="muros" class="form-control">
+      <option value="piedra">Piedra</option>
+      <option value="adobe">Adobe</option>
+      <option value="tabicon">Tabicón</option>
+      <option value="tabique">Tabique</option>
+      <option value="block">Block</option>
+      <option value="otro">Otro</option>
+      <option value="noTiene">No tiene</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="cubiertas">Cubiertas en la vivienda</label>
+    <select name="cubiertas" id="cubiertas" class="form-control">
+      <option value="concreto">Concreto armado</option>
+      <option value="vigueta">Vigueta y bobedilla</option>
+      <option value="panel">Panel</option>
+      <option value="lamina">Lámina</option>
+      <option value="asbesto">Asbesto</option>
+      <option value="carton">Cartón</option>
+      <option value="noTiene">No tiene</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for=""></label>
+    <select name="" id="" class="form-control">
+      <option value=""></option>
+      <option value=""></option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="pisos">Pisos en la vivienda</label>
+    <select name="pisos" id="pisos" class="form-control">
+      <option value="tierra">Tierra</option>
+      <option value="firme">Firme de concreto</option>
+      <option value="madera">Madera</option>
+      <option value="loseta">Loseta</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="tipoSuelo">Tipo de suelo</label>
+    <select name="tipoSuelo" id="tipoSuelo" class="form-control">
+      <option value="lomerio">Lomerío</option>
+      <option value="transicion">Transición</option>
+      <option value="lacustre">Lacustre</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="humedad">Existe humedad en la vivienda</label>
+    <select name="humedad" id="humedad" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Que riesgos existen en la zona</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="cuevas" id="cuevas" value="cuevas">
+    <label class="form-check-label" for="cuevas">Cuevas</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="grietas" id="grietas" value="grietas">
+    <label class="form-check-label" for="grietas">Grietas</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="deslaves" id="deslaves" value="deslaves">
+    <label class="form-check-label" for="deslaves">Deslaves</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="barrancas" id="barrancas" value="barrancas">
+    <label class="form-check-label" for="barrancas">Barrancas</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="minas" id="minas" value="minas">
+    <label class="form-check-label" for="minas">Minas</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="pendientes" id="pendientes" value="pendientes">
+    <label class="form-check-label" for="pendientes">Pendientes pronunciadas</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="pozos" id="pozos" value="pozos">
+    <label class="form-check-label" for="pozos">Pozos</label>
+    <br/>
+    <input class="form-check-input" type="checkbox" name="rios" id="rios" value="rios">
+    <label class="form-check-label" for="rios">Ríos y cuerpos de agua</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="actividadVolcanica" id="actividadVolcanica" 
+    value="actividadVolcanica">
+    <label class="form-check-label" for="actividadVolcanica">Actividad volcánica</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="inestables" id="inestables" value="inestables">
+    <label class="form-check-label" for="inestables">Suelos inestables</label>
+  </div>
+  <div class="form-group">
+    <label for="condicionesEstructurales">Condiciones estructurales (Observaciones)</label>
+    <input type="text" id="condicionesEstructurales" name="condicionesEstructurales" class="form-control" />
+  </div>
+  
+    <div class="form-group">
+    <label for="participacion">¿Se requiere participación de ingeniería?</label>
+    <select name="participacion" id="participacion" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="muroContencion">¿Requiere muro de contención u otra mitigación?</label>
+    <select name="muroContencion" id="muroContencion" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="dobleAltura">La planta baja tiene doble altura</label>
+    <select name="dobleAltura" id="dobleAltura" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="noLlega">Muros no llegan a la cimentación</label>
+    <select name="noLlega" id="noLlega" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="flexible">Planta baja flexible</label>
+    <select name="flexible" id="flexible" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="continuidad">Continuidad estructural entre los elementos</label>
+    <select name="continuidad" id="continuidad" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="asimetria">Asimetría por muros, cubos y cargas</label>
+    <select name="asimetria" id="asimetria" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="geometria">Geometría irregular en planta "L", "I", "H"</label>
+    <select name="geometria" id="geometria" class="form-control">
+      <option value="si">Si</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Que tipo de drenaje cuenta la vivienda</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="red" id="red" value="red">
+    <label class="form-check-label" for="red">Red pública</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="fosa" id="fosa" value="fosa">
+    <label class="form-check-label" for="fosa">Fosa séptica</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="descargaBarrancas" id="descargaBarrancas" value="descargaBarrancas">
+    <label class="form-check-label" for="descargaBarrancas">Descarga a barrancas</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="descargaAire" id="descargaAire" value="descargaAire">
+    <label class="form-check-label" for="descargaAire">Descarga al aire libre</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="otro" id="otro" value="otro">
+    <label class="form-check-label" for="otro">Otro</label>
+  </div>
+
+  <div class="form-group">
+    <label>Que fuentes de abastecimiento de agua potable cuenta la vivienda</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="red" id="red" value="red">
+    <label class="form-check-label" for="red">Red pública</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="pipa" id="pipa" value="pipa">
+    <label class="form-check-label" for="pipa">Pipa</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="tandeo" id="tandeo" value="tandeo">
+    <label class="form-check-label" for="tandeo">Tandeo</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="pozo" id="pozo" value="pozo">
+    <label class="form-check-label" for="pozo">Pozo</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="noHay" id="noHay" value="noHay">
+    <label class="form-check-label" for="noHay">No hay</label>
+    <br />
+    <input class="form-check-input" type="checkbox" name="otro" id="otro" value="otro">
+    <label class="form-check-label" for="otro">Otro</label>
+  </div>
+  <!-- <div class="form-group">
+        <label for=""></label>
+        <input type="text">
+      </div> -->
+  <button class="btn btn-primary">Enviar</button>
+</form>

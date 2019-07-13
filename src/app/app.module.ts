@@ -7,13 +7,18 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewFormComponent } from './components/new-form/new-form.component';
+import { FormsModule } from '@angular/forms';
+import { FormNewPropertyComponent } from './components/form-new-property/form-new-property.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NewFormComponent,
     EsriMapComponent,
+    MainNavComponent,
+    FormNewPropertyComponent,
     
-    MainNavComponent
     
   ],
   imports: [
@@ -24,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule      
   ],
   providers: [],
   bootstrap: [AppComponent]

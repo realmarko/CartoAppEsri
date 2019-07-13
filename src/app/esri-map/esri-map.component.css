@@ -1,8 +1,8 @@
 @import url('https://js.arcgis.com/4.10/esri/css/main.css');
 
-html, body ,.esri-view {
+.esri-view {
   height: 100%;
-  width: 50%;
+  width: 100%;
   margin:0px;
   position: sticky; 
   padding: 0px;
@@ -49,7 +49,7 @@ min-width:300px;
         }
       }
 
-      #map_graphics_layer {
+      #map_graphics_layer,graphic {
         animation-duration: 2s;
         animation-iteration-count: infinite;
         animation-name: pulse;

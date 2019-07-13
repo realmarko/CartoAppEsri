@@ -1,0 +1,54 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="row">
+    <h1>Agregar nueva propiedad</h1>
+
+    <div class="form-group">
+        <label for="propertyType">Tipo de propiedad</label>
+        <select name="propertyType" id="propertyType" class="form-control">
+          <option value="ground">Terreno</option>
+          <option value="home">Casa</option>
+          <option value="departament">Departamento</option>
+        </select>
+      </div>
+
+    <div class="form-group">
+      <label for="street">Calle:</label>
+      <input type="text" class="form-control" id="street" name="street" placeholder="Calle"
+      ngModel
+      required>
+    </div>
+
+    <div class="form-group form-inline mb-2">
+      <label for="externalNumber">Numero ext.:</label>
+      <input type="number" class="form-control" id="externalNumber" name="externalNumber" 
+      placeholder="Número exterior"
+      >
+
+      <label for="zipCode"> Código postal:</label>
+      <input type="text" class="form-control" id="zipCode" name="zipCode" placeholder="Código postal" maxlength="5"
+      required>
+
+    </div>
+
+    <div class="form-group">
+      <label for="transactionType">Tipo</label>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="sell" value="sell" 
+        name="transactionType"
+        checked=true>
+        <label for="sell" class="form-check-label">Vender</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="rent" value="rent"  name="transactionType">
+        <label for="rent" class="form-check-label">Rentar</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="price">Precio</label>
+      <input type="text" class="form-control" name="price" id="price" 
+        [ngModel]="price | currency:'USD'" 
+        required>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Enviar</button>
+</form>

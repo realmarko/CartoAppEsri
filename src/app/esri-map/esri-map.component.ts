@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { loadModules } from 'esri-loader';
 import esri = __esri; // Esri TypeScript Types
+import { PropertyService } from '../services/property.service';
 
 @Component({
   selector: 'app-esri-map',
@@ -43,6 +44,8 @@ export class EsriMapComponent implements OnInit {
   @Input()
   set center(center: Array<number>) {
     this._center = center;
+    this.propertyService.coords.emit(this._center);
+    
   }
 
   get center(): Array<number> {
@@ -58,7 +61,10 @@ export class EsriMapComponent implements OnInit {
     return this._basemap;
   }
 
-  constructor() { }
+  constructor(private propertyService:PropertyService) 
+  { 
+
+  }
 
   async initializeMap() {
     try {
