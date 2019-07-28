@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter }
 import { loadModules } from 'esri-loader';
 import esri = __esri; // Esri TypeScript Types
 import { PropertyService } from '../services/property.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-esri-map',
@@ -21,13 +22,13 @@ export class EsriMapComponent implements OnInit {
    * _basemap sets type of map
    * _loaded provides map loaded status
    */
-  private _zoom = 10;
+  private _zoom = 18;
   private _center: Array<number> = [0.1278, 51.5074];
   private _basemap = 'streets';
   private _loaded = false;
   map: esri.Map;
-  pt:esri.Point;
-
+  pt: esri.Point;
+  subscription: Subscription;
   get mapLoaded(): boolean {
     return this._loaded;
   }
@@ -43,13 +44,23 @@ export class EsriMapComponent implements OnInit {
 
   @Input()
   set center(center: Array<number>) {
-    this._center = center;
-    this.propertyService.coords.emit(this._center);
-    
+    console.log("access set center");
+    //this._center = center;
+    //this.propertyService.coords.emit(this._center);
+    this.propertyService.coords.emit(center);
   }
 
   get center(): Array<number> {
+    console.log("access get center");
+    this.subscription = this.propertyService.coords
+      .subscribe(
+        (center: Array<number>) => {
+          //this.mapViewEl.centerAt = center;
+          this._center = center;
+        }
+      )
     return this._center;
+
   }
 
   @Input()
@@ -61,16 +72,19 @@ export class EsriMapComponent implements OnInit {
     return this._basemap;
   }
 
-  constructor(private propertyService:PropertyService) 
-  { 
+  constructor(private propertyService: PropertyService) {
 
+    // Initialize MapView and return an instance of MapView
+    this.initializeMap().then((mapView) => {
+      this.houseKeeping(mapView);
+    });
   }
 
   async initializeMap() {
     try {
 
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, EsriMapView,Point,SimpleMarkerSymbol] = await loadModules([
+      const [EsriMap, EsriMapView, Point, SimpleMarkerSymbol] = await loadModules([
         'esri/Map',
         'esri/views/MapView',
         'esri/geometry/Point',
@@ -92,9 +106,9 @@ export class EsriMapComponent implements OnInit {
         map: this.map
       };
 
-      this.pt = new  Point ( { longitude: this._center[0], latitude: this._center[1] })
-      
-       console.log(this._center);
+      this.pt = new Point({ longitude: this._center[0], latitude: this._center[1] })
+
+      console.log("valor del centro " + this._center);
       return new EsriMapView(mapViewProperties);
 
     } catch (error) {
@@ -103,36 +117,36 @@ export class EsriMapComponent implements OnInit {
 
   }
 
-  async addGraphic(pt,map){
-    const [Point,SimpleMarkerSymbol,SimpleLineSymbol
-      ,Graphic,Color] = await loadModules([
-      'esri/geometry/Point',
-      "esri/symbols/SimpleMarkerSymbol",
-      "esri/symbols/SimpleLineSymbol",
-      "esri/Graphic", "esri/Color"
-    ]);
-    var symbol:esri.SimpleMarkerSymbol = new SimpleMarkerSymbol(
-      SimpleMarkerSymbol.STYLE_CIRCLE, 
-      12, 
+  async addGraphic(pt, map) {
+    const [Point, SimpleMarkerSymbol, SimpleLineSymbol
+      , Graphic, Color] = await loadModules([
+        'esri/geometry/Point',
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/symbols/SimpleLineSymbol",
+        "esri/Graphic", "esri/Color"
+      ]);
+    var symbol: esri.SimpleMarkerSymbol = new SimpleMarkerSymbol(
+      SimpleMarkerSymbol.STYLE_CIRCLE,
+      12,
       new SimpleLineSymbol(
         SimpleLineSymbol.STYLE_SOLID,
-        new Color([210, 105, 30, 0.5]), 
+        new Color([210, 105, 30, 0.5]),
         8
-      ), 
+      ),
       new Color([210, 105, 30, 0.9])
     );
-    const graphic:esri.Graphic = new Graphic(pt, symbol);
+    const graphic: esri.Graphic = new Graphic(pt, symbol);
     map.graphics.add(graphic);
 
-    const simpleMarkerSymbol1: esri.SimpleMarkerSymbol = new SimpleMarkerSymbol( 
-      SimpleMarkerSymbol.STYLE_CIRCLE, 
+    const simpleMarkerSymbol1: esri.SimpleMarkerSymbol = new SimpleMarkerSymbol(
+      SimpleMarkerSymbol.STYLE_CIRCLE,
       12,
-      new Color ([226, 119, 40]) );
-    
-    const point1:esri.Point = new  Point({ longitude: pt.longitude, latitude: pt.latitude });
+      new Color([226, 119, 40]));
 
-  
-    var pointGraphic:esri.Graphic = new Graphic({
+    const point1: esri.Point = new Point({ longitude: pt.longitude, latitude: pt.latitude });
+
+
+    var pointGraphic: esri.Graphic = new Graphic({
       geometry: point1,
       symbol: simpleMarkerSymbol1
     });
@@ -143,19 +157,20 @@ export class EsriMapComponent implements OnInit {
   // Finalize a few things once the MapView has been loaded
   houseKeeping(mapView) {
     mapView.when(() => {
-       this.addGraphic(this.pt,mapView);
+      this.addGraphic(this.pt, mapView);
       console.log('mapView ready: ', mapView.ready);
       this._loaded = mapView.ready;
       this.mapLoadedEvent.emit(true);
+      //mapView.center=this._center;
+      // mapView.zoom=this._zoom;
     });
   }
 
   ngOnInit() {
-    // Initialize MapView and return an instance of MapView
-    this.initializeMap().then((mapView) => {
-      this.houseKeeping(mapView);
 
-    });
   }
-
+  ngOnDestroy() {
+    if(this.subscription !== null && this.subscription !== undefined )
+    this.subscription.unsubscribe();
+  }
 }

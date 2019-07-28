@@ -1,15 +1,7 @@
 <main-nav (featureSelected)="onFeatureSelected($event)">
       <div class="container">
             <div class="row">
-                  <div class="col col-md-6">
-                        <app-esri-map [center]="mapCenter" [basemap]="basemapType" [zoom]="mapZoomLevel"
-                              (mapLoadedEvent)="mapLoadedEvent($event)">
-                        </app-esri-map>
-                  </div>
-                  <div class="col col-md-6">
-                        <app-form-new-property> </app-form-new-property>
-                  </div>
-
+                  <router-outlet></router-outlet>
             </div>
       </div>
 </main-nav>
