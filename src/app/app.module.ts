@@ -14,10 +14,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
+import { SigninComponent } from './components/auth/signin/signin.component';
+import { AddUserComponent } from './auth/add-user/add-user.component';
+import { EditUserComponent } from './auth/edit-user/edit-user.component';
+import { AuthenticationService } from './services/authentication.service';
+import { AlertComponent } from './alert/alert.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'signup', component: SignupComponent }
+  { path: '', component: SignupComponent },
+  // { path: 'signup', component: SignupComponent }
 
 ];
 @NgModule({
@@ -29,7 +34,11 @@ const appRoutes: Routes = [
     FormNewPropertyComponent,
     HomeComponent,
     SignupComponent,
-    HomeComponent
+    SigninComponent,
+    HomeComponent,
+    AddUserComponent,
+    EditUserComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +54,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   exports:[RouterModule],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

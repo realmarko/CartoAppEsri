@@ -10,21 +10,35 @@ import { Subscription } from 'rxjs';
 })
 export class FormNewPropertyComponent implements OnInit, OnDestroy {
   subscriptionProperty = new Subscription();
+  price;
+  public operationType: string = "sell";
   constructor(private propertyService: PropertyService) {
 
 
   }
 
   ngOnInit() {
-    this.subscriptionProperty = this.propertyService.coords.subscribe(
-      coords => console.log(coords)
-    )
+    // this.subscriptionProperty = this.propertyService.coords.subscribe(
+    //   coords => console.log(coords)
+    // )
+
+    this.propertyService.getProperties()
+      .subscribe(data => {
+        console.log('getPropertiesMethod' + data);
+      });
+
   }
   onSubmit(form: NgForm) {
-    console.log(form.value);
+    console.log('formValue' + form.value);
+    this.propertyService.createProperty(form.value).subscribe();
   }
 
   ngOnDestroy() {
     this.subscriptionProperty.unsubscribe();
   }
+  onItemChange(value: string) {
+    console.log('Valor del radio' + value);
+    this.operationType = value;
+  }
+
 }

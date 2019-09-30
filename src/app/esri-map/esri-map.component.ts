@@ -23,12 +23,14 @@ export class EsriMapComponent implements OnInit {
    * _loaded provides map loaded status
    */
   private _zoom = 18;
-  private _center: Array<number> = [0.1278, 51.5074];
+  private _center: Array<number> = [0.1278, 51.5077];
   private _basemap = 'streets';
   private _loaded = false;
   map: esri.Map;
   pt: esri.Point;
+
   subscription: Subscription;
+  
   get mapLoaded(): boolean {
     return this._loaded;
   }
@@ -44,19 +46,20 @@ export class EsriMapComponent implements OnInit {
 
   @Input()
   set center(center: Array<number>) {
-    console.log("access set center");
-    //this._center = center;
+    console.log("access set center" + center);
+    this._center = center;
     //this.propertyService.coords.emit(this._center);
     this.propertyService.coords.emit(center);
   }
 
   get center(): Array<number> {
-    console.log("access get center");
     this.subscription = this.propertyService.coords
       .subscribe(
         (center: Array<number>) => {
           //this.mapViewEl.centerAt = center;
           this._center = center;
+          console.log("access to method get center" + this._center);
+
         }
       )
     return this._center;
@@ -74,10 +77,7 @@ export class EsriMapComponent implements OnInit {
 
   constructor(private propertyService: PropertyService) {
 
-    // Initialize MapView and return an instance of MapView
-    this.initializeMap().then((mapView) => {
-      this.houseKeeping(mapView);
-    });
+
   }
 
   async initializeMap() {
@@ -167,7 +167,10 @@ export class EsriMapComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    // Initialize MapView and return an instance of MapView
+    this.initializeMap().then((mapView) => {
+      this.houseKeeping(mapView);
+    });
   }
   ngOnDestroy() {
     if(this.subscription !== null && this.subscription !== undefined )
