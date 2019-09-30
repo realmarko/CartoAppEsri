@@ -18,7 +18,9 @@ import { SigninComponent } from './components/auth/signin/signin.component';
 import { AddUserComponent } from './auth/add-user/add-user.component';
 import { EditUserComponent } from './auth/edit-user/edit-user.component';
 import { AuthenticationService } from './services/authentication.service';
-import { AlertComponent } from './alert/alert.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { AlertService } from './services/alert.service';
+
 
 const appRoutes: Routes = [
   { path: '', component: SignupComponent },
@@ -54,7 +56,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   exports:[RouterModule],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService,AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
