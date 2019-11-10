@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PropertyService } from 'src/app/services/property.service';
+import { PropertyService } from 'src/app/_services/property.service';
 import { Subscription } from 'rxjs';
 
 @Component({

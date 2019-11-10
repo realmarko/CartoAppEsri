@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MymapService } from 'src/app/services/mymap.service';
+import { MymapService } from 'src/app/_services/mymap.service';
+import { UserService } from 'src/app/_services/user.service';
+import { User } from 'src/app/_models/user.model';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -7,16 +10,18 @@ import { MymapService } from 'src/app/services/mymap.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  currentUser: User;
+  users: User[] = [];
   title = 'PatoWork';
   lat: any;
   lng: any;
   mapCenter: any;
   basemapType: any;
   mapZoomLevel: any;
-  constructor(private mymapService:MymapService) { 
-    
+  constructor(private mymapService: MymapService, private userService: UserService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
-  ngOnInit(){
+  ngOnInit() {
     this.loadWithPoint();
   }
 
@@ -41,5 +46,18 @@ export class HomeComponent implements OnInit {
     alert(feature);
   }
 
+  deleteUser(id: number) {
+    this.userService.delete(id).pipe(first()).subscribe(() => {
+      this.loadAllUsers();
+    });
+  }
 
+  private loadAllUsers()
+  {
+    this.userService.getAll().pipe(first()).subscribe(
+      users=>{
+        this.users = users;
+      }
+    );
+  }
 }

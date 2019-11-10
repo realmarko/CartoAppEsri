@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { loadModules } from 'esri-loader';
 import esri = __esri; // Esri TypeScript Types
-import { PropertyService } from '../services/property.service';
+import { PropertyService } from '../_services/property.service';
 import { Subscription } from 'rxjs';
 
 @Component({

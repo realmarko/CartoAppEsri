@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Property } from '../_models/property.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'; 
-
-const headers = new HttpHeaders().set("Content-Type", "application/json");
+const headers = new HttpHeaders()
+.set("Content-Type", "application/json");
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,7 +12,9 @@ const httpOptions = {
   })
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PropertyService {
   coords = new EventEmitter<any>();
   baseUrl: string = 'http://localhost:3000/api/properties';
